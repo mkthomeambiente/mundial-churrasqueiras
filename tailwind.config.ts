@@ -10,14 +10,15 @@ const config: Config = {
     extend: {
       colors: {
         mundial: {
-          orange: '#F6A96B',
-          brick: '#D4D5C6',
-          arch: '#9A9B9C',
-          base: '#000000',
+          orange: '#CC6B2C',   // terracota quente
+          brick:  '#8A4B2A',   // tijolo queimado / argila
+          arch:   '#5E5E5F',   // aço escuro / ferrugem leve
+          base:   '#1A1A1A',   // preto carvão
         }
       },
     },
   },
   plugins: [],
 };
+
 export default config;
