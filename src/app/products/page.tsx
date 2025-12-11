@@ -1,36 +1,98 @@
-import Carousel from "@/components/Carousel";
+import Image from "next/image";
 import { COMPANY } from "@/lib/constants";
+import { ArrowRight, Star } from "lucide-react";
+import Carousel from "@/components/Carousel";
+
+/* GBP COMMENT PRESERVED: Products Gallery Page */
 
 export const metadata = {
-  title: "Galeria de Churrasqueiras | Mundial JF",
-  description: "Veja fotos de nossas churrasqueiras pré-moldadas, alvenaria e kits instalados em Juiz de Fora."
+  title: "Catálogo de Churrasqueiras | Mundial JF",
+  description: "Galeria de churrasqueiras pré-moldadas, alvenaria e kits gourmet instalados em Juiz de Fora.",
 };
+
+// Simulando dados vindo do JSON para renderização
+const PRODUCTS_MOCK = [
+  { id: 1, img: '/images/galeria-01.jpg', title: 'Pré-Moldada Tijolinho', cat: 'Clássica' },
+  { id: 2, img: '/images/galeria-02.jpg', title: 'Kit Gourmet 3 em 1', cat: 'Completa' },
+  { id: 3, img: '/images/galeria-03.jpg', title: 'Linha Alvenaria', cat: 'Sob Medida' },
+  { id: 4, img: '/images/galeria-04.jpg', title: 'Churrasqueira Predial', cat: 'Compacta' },
+  { id: 5, img: '/images/galeria-05.jpg', title: 'Fogão a Lenha', cat: 'Tradicional' },
+  { id: 6, img: '/images/galeria-06.jpg', title: 'Forno de Pizza', cat: 'Acessório' },
+];
 
 export default function ProductsPage() {
   return (
-    <div className="container mx-auto px-4 py-12">
-      <h1 className="text-4xl font-bold mb-4 text-center">GALERIA DE PRODUTOS</h1>
-      <p className="text-center text-zinc-600 mb-12 max-w-2xl mx-auto">
-        Confira abaixo a qualidade do nosso acabamento. Trabalhamos com modelos Pré-Moldados, Alvenaria, Kits 3 em 1 (Forno, Fogão e Churrasqueira) e acessórios como Coifas e Tubulações.
-      </p>
-
-      {/* REUTILIZANDO O CARROSSEL COMO VITRINE PRINCIPAL */}
-      <div className="mb-12">
-        <Carousel />
+    <div className="bg-mundial-light min-h-screen">
+      
+      {/* Header da Página */}
+      <div className="bg-mundial-base text-white py-20 px-6 text-center relative overflow-hidden">
+        <div className="absolute inset-0 bg-[url('/images/hero-bg.jpg')] bg-cover opacity-20 mix-blend-overlay"></div>
+        <div className="relative z-10 max-w-screen-xl mx-auto">
+          <h1 className="text-4xl md:text-6xl font-black mb-6">GALERIA DE PRODUTOS</h1>
+          <p className="text-xl text-zinc-300 max-w-2xl mx-auto">
+            Qualidade raiz em cada detalhe. Confira nossos modelos instalados.
+          </p>
+        </div>
       </div>
 
-      <div className="bg-mundial-orange/10 p-8 rounded-xl text-center border border-mundial-orange/20">
-        <h2 className="text-2xl font-bold mb-4">GOSTOU DE ALGUM MODELO?</h2>
-        <p className="mb-6">
-          Não colocamos preços no site pois cada projeto pode ter variações de acessórios e entrega. 
-          Chame no WhatsApp para um orçamento sem compromisso.
-        </p>
-        <a 
-          href={`https://wa.me/${COMPANY.whatsapp_clean}`} 
-          className="inline-block bg-green-600 text-white px-8 py-4 rounded-lg font-bold hover:bg-green-700 transition shadow-lg"
-        >
-          SOLICITAR ORÇAMENTO AGORA
-        </a>
+      <div className="max-w-screen-xl mx-auto px-6 py-20">
+        
+        {/* Carrossel Destaque */}
+        <div className="mb-20">
+          <div className="flex items-center gap-2 mb-6">
+            <Star className="text-mundial-orange" fill="currentColor" />
+            <h2 className="text-2xl font-bold text-mundial-base uppercase tracking-wide">Destaques da Semana</h2>
+          </div>
+          <div className="rounded-2xl overflow-hidden shadow-2xl border-4 border-white">
+            <Carousel />
+          </div>
+        </div>
+
+        {/* Grid de Produtos */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {PRODUCTS_MOCK.map((item) => (
+            <div key={item.id} className="bg-white rounded-2xl shadow-lg overflow-hidden border border-zinc-100 group hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
+              <div className="relative h-72 bg-zinc-200 overflow-hidden">
+                <Image 
+                  src={item.img} 
+                  alt={item.title} 
+                  fill 
+                  className="object-cover group-hover:scale-110 transition-transform duration-700"
+                />
+                <div className="absolute top-4 right-4 bg-mundial-base/80 backdrop-blur text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+                  {item.cat}
+                </div>
+              </div>
+              
+              <div className="p-8">
+                <h3 className="text-2xl font-bold text-mundial-base mb-3">{item.title}</h3>
+                <p className="text-mundial-arch text-sm mb-6">
+                  Acabamento premium e alta durabilidade. Ideal para sua área de lazer.
+                </p>
+                <a 
+                  href={`https://wa.me/${COMPANY.whatsapp_clean}?text=Olá, tenho interesse no modelo: ${item.title}`}
+                  className="block w-full text-center bg-mundial-orange hover:bg-mundial-brick text-white font-bold py-4 rounded-xl transition-colors shadow-md"
+                >
+                  ORÇAR NO WHATSAPP
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* CTA Bottom */}
+        <div className="mt-20 bg-mundial-brick rounded-3xl p-12 text-center text-white shadow-rust relative overflow-hidden">
+           <div className="relative z-10">
+             <h2 className="text-3xl font-black mb-6">NÃO ENCONTROU O QUE PROCURA?</h2>
+             <p className="text-lg mb-8 text-white/90">Fazemos projetos personalizados sob medida para sua casa.</p>
+             <a 
+               href={`https://wa.me/${COMPANY.whatsapp_clean}`} 
+               className="inline-flex items-center gap-2 bg-white text-mundial-brick px-8 py-4 rounded-xl font-bold hover:bg-zinc-100 transition-colors"
+             >
+               FALAR COM PROJETISTA <ArrowRight size={20} />
+             </a>
+           </div>
+        </div>
       </div>
     </div>
   );

@@ -23,7 +23,7 @@ export default function Carousel() {
   }, []);
 
   return (
-    <div className="relative w-full h-[400px] md:h-[600px] overflow-hidden bg-black rounded-xl shadow-2xl">
+    <div className="relative w-full h-[500px] md:h-[600px] bg-mundial-base">
       {IMAGES.map((src, index) => (
         <div
           key={index}
@@ -31,23 +31,26 @@ export default function Carousel() {
             index === current ? 'opacity-100' : 'opacity-0'
           }`}
         >
-          {/* Nota: As imagens precisam existir em public/images para aparecerem */}
           <Image
             src={src}
-            alt="Mundial Churrasqueiras Juiz de Fora"
+            alt={`Churrasqueira Mundial Modelo ${index + 1}`}
             fill
-            className="object-contain"
+            className="object-cover"
             priority={index === 0}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
+          {/* Gradiente sutil na base para integrar com o card */}
+          <div className="absolute inset-0 bg-gradient-to-t from-mundial-base/50 via-transparent to-transparent" />
         </div>
       ))}
       
-      <div className="absolute bottom-8 left-0 right-0 text-center z-10 px-4">
-        <h3 className="text-white text-xl md:text-3xl font-bold drop-shadow-md">
-          QUALIDADE RÚSTICA E RAIZ
-        </h3>
-        <p className="text-mundial-orange font-medium">Fabricação Própria em Juiz de Fora</p>
+      {/* Indicadores */}
+      <div className="absolute bottom-6 left-0 right-0 flex justify-center gap-2 z-10">
+        {IMAGES.map((_, idx) => (
+          <div 
+            key={idx} 
+            className={`h-1 rounded-full transition-all duration-300 ${idx === current ? 'w-8 bg-mundial-orange' : 'w-2 bg-white/50'}`}
+          />
+        ))}
       </div>
     </div>
   );
