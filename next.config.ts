@@ -1,0 +1,9 @@
+import type { NextConfig } from "next";
+
+const nextConfig: NextConfig = {
+  images: {
+    unoptimized: true, // Garante compatibilidade máxima
+  },
+};
+
+export default nextConfig;
