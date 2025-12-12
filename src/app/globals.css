@@ -10,20 +10,5 @@
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: #F5F5F0; /* mundial-light */
-}
-
-/* Scrollbar personalizada para estética Dark/Rust */
-::-webkit-scrollbar {
-  width: 10px;
-}
-::-webkit-scrollbar-track {
-  background: #1A1A1A;
-}
-::-webkit-scrollbar-thumb {
-  background: #CC6B2C;
-  border-radius: 5px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #8A4B2A;
+  background: #F5F5F0;
 }
